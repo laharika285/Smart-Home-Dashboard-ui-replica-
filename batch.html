@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Smart Home Dashboard</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f3f4f6;
+}
+
+/* Layout */
+.dashboard {
+  display: grid;
+  grid-template-columns: 80px 1fr 260px;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  background: #ffffff;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.sidebar nav button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  margin: 12px 0;
+  cursor: pointer;
+}
+
+.sidebar nav .active {
+  background: #e5e7eb;
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.avatar img {
+  width: 44px;
+  border-radius: 50%;
+  margin-top: auto;
+}
+
+/* Main Content */
+.content {
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* Hero */
+.hero {
+  height: 260px;
+  border-radius: 24px;
+  background: url("https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=1600&q=80")
+    center/cover no-repeat;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.stats {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  gap: 10px;
+}
+
+.stats span {
+  background: rgba(255,255,255,0.9);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 16px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  width: 42px;
+  height: 22px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background: #d1d5db;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: 0.3s;
+}
+
+input:checked + .slider {
+  background: #111827;
+}
+
+input:checked + .slider::before {
+  transform: translateX(20px);
+}
+
+/* Vacuum */
+.vacuum img {
+  width: 100px;
+  display: block;
+  margin: 16px auto;
+}
+
+.vacuum-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+/* Lamp */
+.lamp {
+  text-align: center;
+}
+
+.bulb {
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, #fff7cc, #facc15);
+  border-radius: 50%;
+  margin: 16px auto;
+}
+
+.lamp input {
+  width: 100%;
+}
+
+/* Music */
+.music {
+  text-align: center;
+}
+
+.music img {
+  width: 90px;
+  border-radius: 50%;
+}
+
+.controls button {
+  background: #e5e7eb;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 10px;
+  margin: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Rooms */
+.rooms {
+  background: #ffffff;
+  padding: 24px;
+}
+
+.rooms h3 {
+  margin-top: 0;
+}
+
+.rooms ul {
+  list-style: none;
+  padding: 0;
+}
+
+.rooms li {
+  padding: 12px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.rooms li.active {
+  background: #f1f5f9;
+}
+
+.add-room {
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  border: none;
+  background: #111827;
+  color: white;
+  margin-top: 16px;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">∞</div>
+    <nav>
+      <button class="active">🏠</button>
+      <button>💡</button>
+      <button>🎵</button>
+      <button>⚙️</button>
+    </nav>
+    <div class="avatar">
+      <img src="https://i.pravatar.cc/100" />
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="content">
+    <div class="hero">
+      <div class="stats">
+        <span>🌡 24°C</span>
+        <span>💧 50%</span>
+        <span>⚡ 350W</span>
+        <span>📶 80%</span>
+      </div>
+    </div>
+
+    <section class="cards">
+
+      <!-- Vacuum -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Bedroom</h3>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="vacuum">
+          <img src="https://cdn-icons-png.flaticon.com/512/2933/2933934.png">
+          <p><strong>Filter:</strong> 90%</p>
+          <div class="vacuum-stats">
+            <span>75 m²</span>
+            <span>30 min</span>
+            <span>80%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lamp -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Living Room</h3>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="lamp">
+          <div class="bulb"></div>
+          <input type="range" min="0" max="100" value="70">
+          <p id="brightness">Brightness: 70%</p>
+        </div>
+      </div>
+
+      <!-- Music -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Speakers</h3>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="music">
+          <img src="https://i.pravatar.cc/150?img=32">
+          <p>Now Playing</p>
+          <div class="controls">
+            <button>⏮</button>
+            <button>⏸</button>
+            <button>⏭</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Rooms -->
+  <aside class="rooms">
+    <h3>Rooms</h3>
+    <ul>
+      <li>Bedroom <span>3</span></li>
+      <li>Kitchen <span>2</span></li>
+      <li class="active">Living Room <span>5</span></li>
+      <li>Bathroom <span>1</span></li>
+    </ul>
+    <button class="add-room">＋ Add Room</button>
+  </aside>
+
+</div>
+
+<script>
+const slider = document.querySelector("input[type='range']");
+const label = document.getElementById("brightness");
+
+slider.addEventListener("input", () => {
+  label.textContent = `Brightness: ${slider.value}%`;
+});
+</script>
+
+</body>
+</html>
